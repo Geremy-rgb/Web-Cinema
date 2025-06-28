@@ -1,103 +1,100 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import { useEffect, useState } from "react";
+import axios from "axios";
+import plusJakartaSans from "./fonts/fontsPopulars";
+import Link from "next/link";
+
+interface Movie {
+  id: number;
+  title: string;
+  poster_path: string;
+  vote_average: number;
+}
+
+function App() {
+  const API_KEY = "d2d31b7deeae507cf65c0f95d9b3c98c";
+  const [movies, setMovies] = useState<Movie[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
+
+  const HandleGetMovies = async () => {
+    try {
+      const response = await axios.get(
+        `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=es-ES&page=1`
+      );
+      setMovies(response.data.results);
+    } catch {
+      setIsError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    HandleGetMovies();
+  }, []);
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className="flex w-full h-full pt-[20px] px-[160px]">
+      <div className="flex flex-col w-full max-w-[960px] mx-auto">
+        <div className="flex w-full h-[72px] justify-between p-[16px]">
+          <div className="flex w-[300px] h-[40px] min-w-[288px]">
+            <h1
+              className={`${plusJakartaSans.className} w-[700] text-[32px] leading-[40px] tracking-[0]`}
+            >
+              Popular Movies
+            </h1>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+
+        {isLoading ? <h1>Cargando...</h1> : null}
+
+        {/* grilla de peliculas*/}
+
+        <div className="flex-col w-full h-[967px] p-[16px] gap-[12px] grid grid-cols-5">
+          {movies.map((movie) => (
+            <Link href={`/moviesCards/${movie.id}`} key={`${movie.title}`}>
+              <div
+                key={movie.id}
+                className="flex flex-col w-[176px] 
+              h-[303.67px] pb-[12px] gap-[12px]"
+              >
+                <div>
+                  <img
+                    src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                    alt={movie.title}
+                    className={"w-[176px] h-[235px] rounded-[8px]"}
+                  />
+                </div>
+
+                {/* Title y vote_average*/}
+
+                <div className="flex flex-col justify-between w-full">
+                  <h1
+                    className={`${plusJakartaSans.className} text-[16px] leading-[24px] font-medium truncate max-w-[130px]`}
+                  >
+                    {movie.title}
+                  </h1>
+                  <span className="text-[14px] text-neutral-400">
+                    {movie.vote_average.toFixed(1)}
+                  </span>
+                </div>
+              </div>
+            </Link>
+          ))}
+
+          <div className="flex items-center justify-center w-[960px] h-[967]">
+            {isError ? (
+              <h1 className={`${plusJakartaSans} text-[40px]`}>
+                ¡ Ups ! Ocurrió un error
+              </h1>
+            ) : null}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
+
+export default App;
