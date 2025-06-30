@@ -5,3 +5,9 @@ body {
   background: #211212;
   color: #ffffff;
 }
+
+
+@theme {
+  /* colors */
+  --color-buttoms: #472426;
+}

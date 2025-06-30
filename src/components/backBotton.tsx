@@ -8,7 +8,7 @@ export default function BackButton() {
   return (
     <button
       onClick={() => router.back()}
-      className="bottom-4 bg-[#472426] right-4 px-4 py-2"
+      className="bottom-4 right-4 px-4 py-2 bg-buttoms"
     >
     Regresar
     </button>

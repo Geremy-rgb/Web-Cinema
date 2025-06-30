@@ -1,5 +1,5 @@
 import Link from "next/link";
-import plusJakartaSans from "../fonts/fontsPopulars";
+import PlusJakartaSans from "@/TextFonts/Fonts";
 
 export const Header = () => {
   return (
@@ -15,47 +15,52 @@ export const Header = () => {
           </div>
 
           <div className="flex flex-col w-[98px] h-[23px]">
-            <h1
-              className={`${plusJakartaSans} w-[700] text-[18px] leading-[23px] tracking-[0px]`}
-            >
-              CineScope
-            </h1>
+            <Link href={"/"}>
+              <h1
+                className={`${PlusJakartaSans} w-[700] text-[18px] leading-[23px] tracking-[0px]`
+                }                
+              >
+                CineScope
+              </h1>
+            </Link>
           </div>
         </div>
         <div className="flex w-[320px] h-[21px]">
           {/* navbar */}
 
           <ul className="flex w-[41px] h-[21px] gap-[36px]">
-            <Link href={`/`}>
-              <li className="w-[41px] h-[21px]">
-                <a
-                  className={`${plusJakartaSans} w-[500] text-[14px] leading-[21px] tracking-[0px]`}
-                >
-                  Home
-                </a>
-              </li>
-            </Link>
+            <li className="w-[41px] h-[21px]">
+              <Link
+                href={`/`}
+                className={`${PlusJakartaSans} w-[500] text-[14px] leading-[21px] tracking-[0px]`}
+              >
+                Home
+              </Link>
+            </li>
 
             <li className="w-[48px] h-[21px]">
               <a
-                className={`${plusJakartaSans} w-[500] text-[14px] leading-[21px] tracking-[0px]`}
+                className={`${PlusJakartaSans} w-[500] text-[14px] leading-[21px] tracking-[0px]`}
               >
                 Search
               </a>
             </li>
+
             <li className="w-[75px] h-[21px]">
               <a
-                className={`${plusJakartaSans} w-[500] text-[14px] leading-[21px] tracking-[0px]`}
+                className={`${PlusJakartaSans} w-[500] text-[14px] leading-[21px] tracking-[0px]`}
               >
                 Categories
               </a>
             </li>
+
             <li className="w-[48px] h-[21px]">
-              <a
-                className={`${plusJakartaSans} w-[500] text-[14px] leading-[21px] tracking-[0px]`}
+              <Link
+                href="/favorites"
+                className={`${PlusJakartaSans} w-[500] text-[14px] leading-[21px] tracking-[0px]`}
               >
-                People
-              </a>
+                Favorites
+              </Link>
             </li>
           </ul>
         </div>
@@ -66,7 +71,7 @@ export const Header = () => {
           <input
             type="text"
             placeholder="Search"
-            className="flex h-full w-full bg-[#472426] rounded-2xl text-center "
+            className="flex h-full w-full bg-buttoms rounded-2xl text-center "
           />
           <img
             src="/vectorSearch.png"
@@ -74,7 +79,7 @@ export const Header = () => {
           />
         </div>
 
-        <div className="flex w-[40px] h-[40px] w-max-[480px] rounded-[8px] pr-[10px] pl-[10px] pt-[10px] pb-[10px] gap-[8px]  bg-[#472426]">
+        <div className="flex w-[40px] h-[40px] w-max-[480px] rounded-[8px] pr-[10px] pl-[10px] pt-[10px] pb-[10px] gap-[8px]  bg-buttoms">
           <img src="/save.png" className="flex w-[20px] h-[20px]" />
         </div>
 

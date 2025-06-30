@@ -1,33 +1,19 @@
-import plusJakartaSans from "@/app/fonts/fontsPopulars";
-import BackButton from "@/app/components/backBotton";
+"use client";
 
-interface Movie {
-  id: number;
-  popularity: number;
-  vote_count: number;
-  vote_average: number;
-  title: string;
-  backdrop_path: string;
-  overview: string;
-  genres: {
-    id: number;
-    name: string;
-  }[];
-  release_date: number;
-  runtime: number;
-}
+import { useContext } from "react";
+import plusJakartaSans from "../TextFonts/Fonts";
+import BackButton from "./backBotton";
+import Movie from "../interfaces/moviesType";
+import { FavoriteContext } from "../contexts/favoriteContext";
 
-export default async function MoviePage({
-  params,
-}: {
-  params: Promise<{ id: number }>;
-}) {
-  const API_KEY = "d2d31b7deeae507cf65c0f95d9b3c98c";
-  const { id } = await params;
-  const res = await fetch(
-    `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=es-ES&page=1`
-  );
-  const movie: Movie = await res.json();
+
+export default function MovieDetail({ movie }: { movie: Movie }) {
+
+  const context = useContext(FavoriteContext);
+  if (!context) return null;
+
+  const { favorites, addFavorite, removeFavorite } = context;
+  const isFavorite = favorites.some((fav) => fav.id === movie.id);
 
   return (
     <div className="flex w-full h-full pt-[20px] pr-[160px] pb-[20px] pl-[160px] justify-center">
@@ -46,13 +32,16 @@ export default async function MoviePage({
               className={`${plusJakartaSans} flex w-[700] text-[32px] leading-[40px] font-bold`}
             >
               {movie.title}
-
             </h1>
           </div>
           <div className="flex w-[141] h-[40px] min-w-[84px] max-w-[480px] pt-[8px]">
-            <button className="bg-[#472426] text-[16px] w-[141px] h-[32px] rounded-2xl">
-              {" "}
-              Añadir a favoritos
+            <button
+              onClick={() =>
+                isFavorite ? removeFavorite(movie.id) : addFavorite(movie)
+              }
+              className="bg-buttoms text-[16px] w-[141px] h-[32px] rounded-2xl"
+            >
+              {isFavorite ? "Quitar de favoritos" : "Añadir a favoritos"}
             </button>
           </div>
         </div>
@@ -74,7 +63,7 @@ export default async function MoviePage({
             {movie.genres.map((genre) => (
               <button
                 key={genre.id}
-                className="px-2 py-1 bg-[#472426] rounded text-sm"
+                className="px-2 py-1 bg-buttoms rounded text-sm"
               >
                 {genre.name}
               </button>
@@ -85,13 +74,16 @@ export default async function MoviePage({
         {/* descripcion de la pelicula */}
 
         <div className="flex flex-col w-[960px] h-[136px] pt-[4px] pr-[16px] pb-[12px] pl-[16px]">
-            <div className="flex w-[928px] h-[120px]">
-                <h2 className={`${plusJakartaSans} font-normal text-base leading-6 tracking-normal`}>
-                    {movie.overview}
-                </h2>
-            </div>
+          <div className="flex w-[928px] h-[120px]">
+            <h2
+              className={`${plusJakartaSans} font-normal text-base leading-6 tracking-normal`}
+            >
+              {movie.overview}
+            </h2>
+          </div>
         </div>
-        <BackButton/>
+
+        <BackButton />
       </div>
     </div>
   );

@@ -2,15 +2,9 @@
 
 import { useEffect, useState } from "react";
 import axios from "axios";
-import plusJakartaSans from "./fonts/fontsPopulars";
+import plusJakartaSans from "../TextFonts/Fonts";
 import Link from "next/link";
-
-interface Movie {
-  id: number;
-  title: string;
-  poster_path: string;
-  vote_average: number;
-}
+import Movie from "../interfaces/moviesType";
 
 function App() {
   const API_KEY = "d2d31b7deeae507cf65c0f95d9b3c98c";
@@ -54,7 +48,8 @@ function App() {
 
         <div className="flex-col w-full h-[967px] p-[16px] gap-[12px] grid grid-cols-5">
           {movies.map((movie) => (
-            <Link href={`/moviesCards/${movie.id}`} key={`${movie.title}`}>
+
+            <Link href={`/movies/${movie.id}`} key={`${movie.title}`}>
               <div
                 key={movie.id}
                 className="flex flex-col w-[176px] 
@@ -82,6 +77,7 @@ function App() {
                 </div>
               </div>
             </Link>
+
           ))}
 
           <div className="flex items-center justify-center w-[960px] h-[967]">
