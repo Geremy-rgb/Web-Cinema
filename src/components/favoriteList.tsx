@@ -5,19 +5,29 @@ import { FavoriteContext } from "../contexts/favoriteContext";
 import Movie from "../interfaces/moviesType";
 import PlusJakartaSans from "@/TextFonts/Fonts";
 import BackButton from "./backBotton";
+import { useSearch } from "@/contexts/SearchContext";
 
 export default function FavoriteList() {
   const context = useContext(FavoriteContext);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
 
+  const { searchTerm } = useSearch();
+
   if (!context) return null;
   const { favorites, removeFavorite } = context;
 
-  const totalPages = Math.ceil(favorites.length / itemsPerPage);
+  const filteredFavorites = favorites.filter((movie) =>
+    movie.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const totalPages = Math.ceil(filteredFavorites.length / itemsPerPage);
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentFavorites = favorites.slice(indexOfFirstItem, indexOfLastItem);
+  const currentFavorites = filteredFavorites.slice(
+    indexOfFirstItem,
+    indexOfLastItem
+  );
 
   if (favorites.length === 0) {
     return <p>No tienes películas favoritas aún.</p>;
@@ -29,7 +39,7 @@ export default function FavoriteList() {
       <div className="flex w-full h-fit justify-between p-4">
         <div className="flex flex-col w-fit h-fit min-w-72">
           <h1 className={`${PlusJakartaSans} w-[700] text-4xl leading-10 `}>
-            My Favorites
+            My Favorite Movies
           </h1>
         </div>
       </div>
@@ -89,7 +99,7 @@ export default function FavoriteList() {
           <button
             key={page}
             onClick={() => setCurrentPage(page)}
-            className={`px-3 py-1 rounded ${
+            className={`w-10 h-10 flex items-center justify-center rounded-full text-white ${
               currentPage === page ? "bg-[#472426] text-white" : "bg-[#5a3638]"
             }`}
           >
@@ -100,7 +110,7 @@ export default function FavoriteList() {
 
       {/* boton para volver  */}
 
-      <div className="">
+      <div className="flex justify-end">
         <BackButton />
       </div>
     </div>

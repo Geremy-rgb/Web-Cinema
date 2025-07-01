@@ -1,4 +1,4 @@
-import Movie from "@/interfaces/moviesType";
+import MovieType from "@/interfaces/moviesType";
 import MovieDetail from "@/components/movieDetail";
 
 export default async function MoviePage({
@@ -11,6 +11,6 @@ export default async function MoviePage({
   const res = await fetch(
     `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=es-ES&page=1`
   );
-  const movie: Movie = await res.json();
+  const movie: MovieType = await res.json();
   return <MovieDetail movie={movie} />;
 }

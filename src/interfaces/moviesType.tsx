@@ -1,4 +1,4 @@
-interface Movie {
+interface MovieType {
   id: number;
   popularity: number;
   vote_count: number;
@@ -15,4 +15,4 @@ interface Movie {
   poster_path: string;
 }
 
-export default Movie;
+export default MovieType;
