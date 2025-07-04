@@ -1,39 +1,18 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import axios from "axios";
 import plusJakartaSans from "../TextFonts/Fonts";
 import Link from "next/link";
-import MovieType from "../interfaces/moviesType";
-import { useSearch } from "@/contexts/SearchContext";
+import { useSearchContext } from "@/contexts/SearchContext";
+import { useGetMovies } from "@/hooks/UseGetMovies";
 
-function App() {
-  const API_KEY = "d2d31b7deeae507cf65c0f95d9b3c98c";
-  const [movies, setMovies] = useState<MovieType[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isError, setIsError] = useState(false);
-  const { searchTerm } = useSearch();
+function App () {
+
+  const { searchTerm } = useSearchContext();
+  const {movies, isLoading, isError} = useGetMovies();
 
   const filteredMovies = movies.filter((movie) =>
     movie.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
-  const HandleGetMovies = async () => {
-    try {
-      const response = await axios.get(
-        `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=es-ES&page=1`
-      );
-      setMovies(response.data.results);
-    } catch {
-      setIsError(true);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    HandleGetMovies();
-  }, []);
 
   return (
     <div className="flex w-full h-full pt-5 px-40">
@@ -53,7 +32,9 @@ function App() {
         {/* grilla de peliculas*/}
 
         <div className="flex-col w-full h-[967px] p-4 gap-3 grid grid-cols-5">
+
           {filteredMovies.map((movie) => (
+            
             <Link href={`/movies/${movie.id}`} key={`${movie.title}`}>
               <div
                 key={movie.id}
@@ -72,7 +53,7 @@ function App() {
 
                 <div className="flex flex-col justify-between w-full">
                   <h1
-                    className={`${plusJakartaSans.className} text-4 leading-6 font-medium truncate max-w-32]`}
+                    className={`${plusJakartaSans} text-4 leading-6 font-medium truncate max-w-32]`}
                   >
                     {movie.title}
                   </h1>

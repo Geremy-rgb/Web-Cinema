@@ -3,11 +3,11 @@
 import { useContext } from "react";
 import plusJakartaSans from "../TextFonts/Fonts";
 import BackButton from "./backBotton";
-import MovieType from "../interfaces/moviesType";
+import Movie from "../interfaces/moviesType";
 import { FavoriteContext } from "../contexts/favoriteContext";
 
 
-export default function MovieDetail({ movie }: { movie: MovieType }) {
+export default function MovieDetail({ movie }: { movie: Movie }) {
 
   const context = useContext(FavoriteContext);
   if (!context) return null;

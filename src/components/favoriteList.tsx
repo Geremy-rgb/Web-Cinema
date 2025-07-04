@@ -2,17 +2,18 @@
 
 import { useContext, useState } from "react";
 import { FavoriteContext } from "../contexts/favoriteContext";
-import Movie from "../interfaces/moviesType";
+import Movie from "@/interfaces/moviesType";
 import PlusJakartaSans from "@/TextFonts/Fonts";
 import BackButton from "./backBotton";
-import { useSearch } from "@/contexts/SearchContext";
+import { useSearchContext } from "@/contexts/SearchContext";
+import Link from "next/link";
 
 export default function FavoriteList() {
   const context = useContext(FavoriteContext);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
 
-  const { searchTerm } = useSearch();
+  const { searchTerm } = useSearchContext();
 
   if (!context) return null;
   const { favorites, removeFavorite } = context;
@@ -52,11 +53,13 @@ export default function FavoriteList() {
           className="flex w-full h-fit justify-between pt-3 pr-4 pb-3 pl-4"
         >
           <div className="flex items-start gap-4 mb-6">
-            <img
-              src={`https://image.tmdb.org/t/p/w92${movie.poster_path}`}
-              alt={movie.title}
-              className="w-[70px] h-[93px] rounded-tr-lg]"
-            />
+            <Link href={`/movies/${movie.id}`}>
+              <img
+                src={`https://image.tmdb.org/t/p/w92${movie.poster_path}`}
+                alt={movie.title}
+                className="w-[70px] h-[93px] rounded-tr-lg]"
+              />
+            </Link>
 
             <div className="flex flex-col w-full h-fit">
               <div className="flex flex-col w-full h-fit">

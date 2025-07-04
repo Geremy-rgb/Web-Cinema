@@ -14,6 +14,7 @@ export const FavoriteContext = createContext<favoriteContextType | undefined>(
 );
 
 export const FavoriteProvider = ({ children }: { children: ReactNode }) => {
+  
   const [favorites, setFavorites] = useState<Movie[]>([]);
 
   useEffect(() => {

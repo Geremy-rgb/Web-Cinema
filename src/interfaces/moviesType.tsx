@@ -1,4 +1,4 @@
-interface MovieType {
+interface Movie {
   id: number;
   popularity: number;
   vote_count: number;
@@ -10,9 +10,9 @@ interface MovieType {
     id: number;
     name: string;
   }[];
-  release_date: number;
+  release_date: string;
   runtime: number;
   poster_path: string;
 }
 
-export default MovieType;
+export default Movie;
