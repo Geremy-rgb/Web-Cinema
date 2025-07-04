@@ -13,16 +13,16 @@ export default function SearchCompo() {
   const itemsPerPage = 4;
 
   const filteredMovies = movies.filter((movie) => {
-  const term = searchTerm.toLowerCase();
+    const term = searchTerm.toLowerCase();
 
-  const matchTitle = movie.title.toLowerCase().includes(term);
+    const matchTitle = movie.title.toLowerCase().includes(term);
 
-  const matchGenre = movie.genres.some((genre) =>
-    genre.name.toLowerCase().includes(term)
-  );
+    const matchGenre = movie.genres.some((genre) =>
+      genre.name.toLowerCase().includes(term)
+    );
 
-  return matchTitle || matchGenre;
-});
+    return matchTitle || matchGenre;
+  });
 
   const totalPages = Math.ceil(filteredMovies.length / itemsPerPage);
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -55,7 +55,11 @@ export default function SearchCompo() {
             {/* imagen reset */}
             <div className="flex w-fit items-center justify-center min-w-[40px] h-full rounded-tr-[12px] rounded-br-[12px] bg-buttoms">
               <div className="flex w-full h-6 max-w-[480px] rounded-[12px] gap-2">
-                <div className="flex flex-col W-full h-full">
+                <div
+                  className="flex flex-col W-full h-full"
+                  onClick={() => setSearchTerm("")}
+                  style={{ cursor: "pointer" }}
+                >
                   <img src="/resetSearch.png" className="" />
                 </div>
               </div>
