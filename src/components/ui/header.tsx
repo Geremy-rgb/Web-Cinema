@@ -34,7 +34,7 @@ export const Header = () => {
             <li className="w-10 h-5">
               <Link
                 href={`/`}
-                className={`${PlusJakartaSans} w-[500] text-[14px] leading-5 tracking-[0px]`}
+                className={`${PlusJakartaSans} font-medium text-[14px] leading-5 tracking-normal`}
               >
                 Home
               </Link>
@@ -43,7 +43,7 @@ export const Header = () => {
             <li className="w-12 h-5">
               <Link
               href="/search"
-                className={`${PlusJakartaSans} w-[500] text-[14px] leading-5 tracking-[0px]`}
+                className={`${PlusJakartaSans} font-medium text-[14px] leading-5 tracking-normal`}
               >
                 Search
               </Link>
@@ -52,7 +52,7 @@ export const Header = () => {
             <li className="w-[75px] h-[21px]">
               <Link
                 href="/categories"
-                className={`${PlusJakartaSans} w-[500] text-[14px] leading-5 tracking-[0px]`}
+                className={`${PlusJakartaSans} font-medium text-[14px] leading-5 tracking-normal`}
               >
                 Categories
               </Link>
@@ -61,7 +61,7 @@ export const Header = () => {
             <li className="w-[48px] h-[21px]">
               <Link
                 href="/favorites"
-                className={`${PlusJakartaSans} w-[500] text-[14px] leading-5 tracking-[0px]`}
+                className={`${PlusJakartaSans} font-medium text-[14px] leading-5 tracking-normal`}
               >
                 Favorites
               </Link>
@@ -70,16 +70,16 @@ export const Header = () => {
         </div>
       </div>
 
-      <div className="flex w-[718px] h-[40px] gap-[32px] justify-end">
+      <div className="flex w-[718px] h-10 gap-8 justify-end">
 
         <SearchInput className="flex h-full w-full bg-buttoms rounded-2xl text-center"/>
 
-        <div className="flex w-[40px] h-[40px] w-max-[480px] rounded-[8px] pr-[10px] pl-[10px] pt-[10px] pb-[10px] gap-[8px]  bg-buttoms">
-          <img src="/save.png" className="flex w-[20px] h-[20px]" />
+        <div className="flex w-10 h-10 w-max-[480px] rounded-[8px] pr-[10px] pl-[10px] pt-[10px] pb-[10px] gap-2 bg-buttoms">
+          <img src="/save.png" className="flex w-5 h-5" />
 
         </div>
 
-        <img src="photo.png" className="w-[40px] h-[40px] rounded-[20px]" />
+        <img src="photo.png" className="w-10 h-10 rounded-[20px]" />
       </div>
     </div>
   );
