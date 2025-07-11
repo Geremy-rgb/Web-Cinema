@@ -1,4 +1,4 @@
-import SearchCompo from "@/components/searchComponent"
+import SearchCompo from "@/components/search/searchComponent"
 
 function Search() {
   return (

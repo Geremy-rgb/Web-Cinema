@@ -116,7 +116,7 @@ export default function SearchCompo() {
               key={page}
               onClick={() => setCurrentPage(page)}
               className={`w-10 h-10 flex items-center justify-center rounded-full text-white ${
-                currentPage === page ? "bg-[#472426]" : "bg-[#5a3638]"
+                currentPage === page ? "bg-buttoms" : "bg-bottons-selected"
               }`}
             >
               {page}

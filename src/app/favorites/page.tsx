@@ -1,6 +1,6 @@
 "use client";
 
-import FavoriteList from "../../components/favoriteList";
+import FavoriteList from "@/components/favorites/favoriteList";
 
 export default function FavoritesPage() {
   return (

@@ -1,5 +1,5 @@
 import MovieType from "@/interfaces/moviesType";
-import MovieDetail from "@/components/movieDetail";
+import MovieDetail from "@/components/movies/movieDetail";
 
 export default async function MoviePage({
   params,

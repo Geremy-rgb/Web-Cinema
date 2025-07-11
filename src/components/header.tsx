@@ -50,11 +50,12 @@ export const Header = () => {
             </li>
 
             <li className="w-[75px] h-[21px]">
-              <a
+              <Link
+                href="/categories"
                 className={`${PlusJakartaSans} w-[500] text-[14px] leading-5 tracking-[0px]`}
               >
                 Categories
-              </a>
+              </Link>
             </li>
 
             <li className="w-[48px] h-[21px]">

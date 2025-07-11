@@ -1,10 +1,10 @@
 "use client";
 
 import { useContext, useState } from "react";
-import { FavoriteContext } from "../contexts/favoriteContext";
+import { FavoriteContext } from "@/contexts/favoriteContext";
 import Movie from "@/interfaces/moviesType";
 import PlusJakartaSans from "@/TextFonts/Fonts";
-import BackButton from "./backBotton";
+import BackButton from "../ui/backBotton";
 import { useSearchContext } from "@/contexts/SearchContext";
 import Link from "next/link";
 

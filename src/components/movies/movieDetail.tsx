@@ -1,10 +1,10 @@
 "use client";
 
 import { useContext } from "react";
-import plusJakartaSans from "../TextFonts/Fonts";
-import BackButton from "./backBotton";
-import Movie from "../interfaces/moviesType";
-import { FavoriteContext } from "../contexts/favoriteContext";
+import plusJakartaSans from "../../TextFonts/Fonts";
+import BackButton from "../ui/backBotton";
+import Movie from "../../interfaces/moviesType";
+import { FavoriteContext } from "../../contexts/favoriteContext";
 
 
 export default function MovieDetail({ movie }: { movie: Movie }) {
