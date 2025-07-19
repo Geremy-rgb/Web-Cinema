@@ -1,5 +1,6 @@
 import { useSearchContext } from "@/contexts/SearchContext";
-import React from "react";
+import React, { useEffect, useState} from "react";
+import { useDebounce } from "@/hooks/useDebounce";
 
 type InputTypes = {
   className: string;
@@ -9,6 +10,18 @@ function SearchInput({className}: InputTypes) {
 
   const { searchTerm, setSearchTerm } = useSearchContext();
 
+  const [localInput, setLocalInput] = useState<string>(searchTerm);
+
+  const debouncedInput = useDebounce(localInput, 500);
+
+  useEffect(() => {
+    setLocalInput(searchTerm);
+  }, [searchTerm])
+
+  useEffect(() => {
+    if (debouncedInput !== searchTerm)
+  setSearchTerm(debouncedInput)}, [debouncedInput, searchTerm, setSearchTerm])
+
   return (
     <div>
 
@@ -17,8 +30,8 @@ function SearchInput({className}: InputTypes) {
         <input
           type="text"
           placeholder="Search"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          value={localInput}
+          onChange={(e) => setLocalInput(e.target.value)}
           className={className}
         />
 

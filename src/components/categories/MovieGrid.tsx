@@ -2,16 +2,24 @@
 import Link from "next/link";
 import Movie from "@/interfaces/moviesType";
 import PlusJakartaSans from "@/TextFonts/Fonts";
+import { useSearchContext } from "@/contexts/SearchContext";
 
 interface Props {
   movies: Movie[];
 }
 
 export default function MovieGrid({ movies }: Props) {
+  const { searchTerm } = useSearchContext();
+
+  const filteredMovies = movies.filter((movie) => {
+    const term = searchTerm.toLowerCase();
+    return movie.title.toLowerCase().includes(term);
+  });
+
   return (
     <div className="flex flex-col w-full h-fit p-4 gap-4">
       <div className="grid grid-cols-5 w-full h-fit gap-3">
-        {movies.map((movie) => (
+        {filteredMovies.map((movie) => (
           <Link href={`/movies/${movie.id}`} key={movie.id}>
             <div className="flex flex-col w-44 h-fit min-h-[283px] pb-3 gap-3">
               <img
