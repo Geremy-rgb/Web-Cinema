@@ -38,6 +38,7 @@ export const FavoriteProvider = ({ children }: { children: ReactNode }) => {
     setFavorites(favorites.filter((movie) => movie.id !== id));
   };
 
+
   return (
      <FavoriteContext.Provider value={{ favorites, addFavorite, removeFavorite }}>
       {children}
