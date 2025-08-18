@@ -93,10 +93,13 @@ export const Header = () => {
         <SearchInput className="flex h-full w-full bg-buttoms rounded-2xl text-center" />
 
         <div className="flex w-10 h-10 w-max-[480px] rounded-[8px] pr-[10px] pl-[10px] pt-[10px] pb-[10px] gap-2 bg-buttoms">
+
           <img src="/save.png" className="flex w-5 h-5" />
+
         </div>
 
-        <img src={user.picture} className="w-10 h-10 rounded-[20px]" />
+        {!user.picture ? <img src={user.picture} className="w-10 h-10 rounded-[20px]"/> : <img src="/Picture.jpg" className="w-10 h-10 rounded-[20px]" />  }
+        
       </div>
     </div>
   );
