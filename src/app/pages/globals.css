@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+
+body {
+  background: #211212;
+  color: #ffffff;
+
+}
+
+
+@theme {
+  /* colors */
+  --color-buttoms: #472426;
+  --color-bottons-selected: #5a3638;
+  --color-login: #E82630;
+}
