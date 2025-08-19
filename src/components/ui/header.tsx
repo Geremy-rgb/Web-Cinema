@@ -98,7 +98,7 @@ export const Header = () => {
 
         </div>
 
-        {!user.picture ? <img src={user.picture} className="w-10 h-10 rounded-[20px]"/> : <img src="/Picture.jpg" className="w-10 h-10 rounded-[20px]" />  }
+        {user.picture ? <img src={user.picture} className="w-10 h-10 rounded-[20px]"/> : <img src="/Picture.jpg" className="w-10 h-10 rounded-[20px]" />  }
         
       </div>
     </div>
